@@ -286,6 +286,42 @@ ORIGEN, SECTOR, SEXO, TIPO_PACIENTE, NACIONALIDAD, ENTIDAD_UM, ENTIDAD_NAC, ENTI
 
 ---
 
-## Paso 12 — (pendiente)
+## Paso 12 — Reproducibilidad: notebook configurable por estado ✓
 
-> En construcción.
+### Objetivo
+
+Hacer el notebook completamente reproducible para cualquier entidad federativa de México sin modificar código. Basta con cambiar el archivo `.env`.
+
+### Variables de configuración (`.env` / `.env.example`)
+
+| Variable | Descripción | Ejemplo (Durango) |
+|---|---|---|
+| `ENTIDAD_CLAVE` | Clave numérica SSa/INEGI del estado | `10` |
+| `ESTADO_NOMBRE` | Nombre en minúsculas para colecciones y CSV | `durango` |
+| `ESTADO_POB_TOTAL` | Población total — Censo INEGI 2020 | `1832650` |
+| `ESTADO_POB_HOMBRES` | Población masculina — Censo INEGI 2020 | `904866` |
+| `ESTADO_POB_MUJERES` | Población femenina — Censo INEGI 2020 | `927784` |
+
+### Variables derivadas generadas automáticamente
+
+```python
+COL_ESTADO     = ESTADO_NOMBRE                     # colección estado
+COL_ESTADO_MAP = f"{ESTADO_NOMBRE}_mapeado"        # colección mapeada
+CSV_SIN_MAPEAR = f"data/{ESTADO_NOMBRE}_sin_mapear.csv"
+CSV_MAPEADO    = f"data/{ESTADO_NOMBRE}_mapeado.csv"
+```
+
+### Cambios aplicados al notebook
+
+- Se insertaron 2 celdas de configuración justo después de la conexión a MongoDB: una markdown con la tabla de variables y una de código que lee el `.env`.
+- 12 celdas actualizadas: todas las referencias a `10` (clave), `"durango"`, `db["durango"]`, `db["durango_mapeado"]`, rutas CSV y diccionario de población fueron reemplazadas por las variables de entorno.
+
+### Para analizar otro estado
+
+1. Copiar `.env.example` a `.env`
+2. Ajustar las 5 variables
+3. Ejecutar el notebook completo — sin tocar una sola línea de código
+
+### Rama git
+
+`feature/configurable-estado` — commit `5443164`
