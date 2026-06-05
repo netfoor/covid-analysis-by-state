@@ -14,3 +14,6 @@ generar_reporte.py
 mongodb_root_password.txt
 # Credenciales
 .env
+
+# Notas personales
+learn.md
