@@ -1,0 +1,19 @@
+[project]
+name = "joel-covid"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "ipykernel>=7.2.0",
+    "matplotlib>=3.10.9",
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.3",
+    "polars>=1.41.0",
+    "pyarrow>=24.0.0",
+    "pymongo>=4.17.0",
+    "python-docx>=1.2.0",
+    "requests>=2.34.2",
+]
+
