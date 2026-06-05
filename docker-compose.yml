@@ -1,0 +1,25 @@
+services:
+  mongodb:
+    image: mongo:8.0
+    container_name: mongodb-covid-joel
+    restart: unless-stopped
+    
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongodb-root-password
+
+    secrets:
+      - mongodb-root-password
+
+    volumes:
+      - mongodb_data_joel:/data/db
+
+    ports:
+      - "127.0.0.1:27017:27017"
+
+volumes:
+  mongodb_data_joel:
+
+secrets:
+  mongodb-root-password:
+    file: ./mongodb_root_password.txt
